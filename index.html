@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #222;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glitter Effect */
+        .glitter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glitter::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2); /* Increased opacity */
+            pointer-events: none;
+            animation: glitterBackground 1.5s infinite; /* Faster animation */
+        }
+
+        @keyframes glitterBackground {
+            0% { background: rgba(255, 255, 255, 0.2); }
+            50% { background: rgba(255, 255, 255, 0.3); }
+            100% { background: rgba(255, 255, 255, 0.2); }
+        }
+
+        header {
+            background: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #f5f5f5;
+            animation: glitter 1.5s infinite;
+        }
+
+        @keyframes glitter {
+            0% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #f5f5f5, 0 0 20px #f5f5f5, 0 0 25px #f5f5f5, 0 0 30px #f5f5f5; }
+            100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #f5f5f5, 0 0 40px #f5f5f5, 0 0 50px #f5f5f5, 0 0 60px #f5f5f5; }
+        }
+
+        section {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 20px;
+            background: #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        section:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .about, .skills, .internships, .contact {
+            background: #333;
+        }
+
+        .about:hover, .skills:hover, .internships:hover, .contact:hover {
+            transform: scale(1.05);
+        }
+
+        .about img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            width: 200px; /* Updated size for profile picture */
+        }
+
+        .skills ul, .contact form {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills li {
+            background: #444;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact label, .contact input, .contact textarea, .contact button {
+            margin-bottom: 10px;
+        }
+
+        .contact input, .contact textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #444;
+            color: #fff;
+        }
+
+        .contact button {
+            background: #ff5722;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact button:hover {
+            background: #e64a19;
+        }
+
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .project-card {
+            background: #444;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card:hover {
+            background: #555;
+            transform: translateY(-5px);
+        }
+
+        .project-card:hover::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: glitter 2s infinite;
+            z-index: 1;
+        }
+
+        .project-card h3 {
+            margin: 0;
+            font-size: 1.5em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card button {
+            background: #ff5722;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 2;
+            position: relative;
+        }
+
+        .project-card button:hover {
+            background: #e64a19;
+        }
+
+        .demo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .demo iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+        }
+
+        .demo button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff5722;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .demo button:hover {
+            background: #e64a19;
+        }
+
+        .internship {
+            background: #444;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .internship h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .internship p {
+            margin: 5px 0;
+        }
+
+        footer {
+            background: #333;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 20px; /* Updated padding for larger footer */
+            position: relative;
+            font-size: 1.2em; /* Updated font size for medium footer */
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .footer-glitter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff0000, #ff9900, #33cc33, #0099ff, #cc33ff);
+            background-size: 400% 400%;
+            animation: rainbowGlitter 5s infinite;
+        }
+
+        @keyframes rainbowGlitter {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+    </style>
+    <!-- Add EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+    </script>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+    </header>
+
+    <div class="glitter"></div>
+
+    <section class="about">
+        <h2>About Me</h2>
+        <img src="https://i.postimg.cc/WthCqsyL/IMG-20240730-192123.jpg" alt="Profile Picture" width="200"> <!-- Updated width for profile picture -->
+        <p>I belong's to Chennai.Iam a motivated and adaptable person seeking a challenging position at IT sector to develop and contribute my skills. I pursuing  my  bachelor degree at peri college of arts and science, chennai.</p>
+    </section>
+
+    <section class="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Artificial Intelligence</li>
+            <li>Machine Learning</li>
+            <li>Python</li>
+                        <li>Java</li>
+        </ul>
+    </section>
+
+    <section class="internships">
+        <h2>Internships</h2>
+        <div class="internship">
+            <h3>AI/ML Intern at YBI Foundation</h3>
+            <p><strong>Duration:</strong> Remote, 2/6/2024 to 2/7/2024</p>
+        </div>
+        <div class="internship">
+            <h3>Web Development Intern at CODSOFT</h3>
+            <p><strong>Duration:</strong> Remote, 15/7/2024 to 15/8/2024</p>
+        </div>
+        <div class="internship">
+            <h3>Web Development Intern at Prodigy Infotech</h3>
+            <p><strong>Duration:</strong> Remote, 1/8/2024 to 31/8/2024</p>
+        </div>
+        <div class="internship">
+            <h3>Web Development Intern at Technohacks EduTech</h3>
+            <p><strong>Duration:</strong> Remote, 8/8/2024 to 8/9/2024</p>
+        </div>
+    </section>
+
+    <section class="projects">
+        <h2>Projects</h2>
+        <div class="project-card">
+            <h3>Currency Converter</h3>
+            <p> The project is a currency converter web application with a dynamic background and rain animation, using HTML, CSS, and JavaScript for functionality and styling.</p>
+            <button onclick="window.open('https://diwakaranr.github.io/TECHNOHACKSEdutech/', '_blank')">View Demo</button>
+        </div>
+        <div class="project-card">
+            <h3>Tic Tac Toe Application</h3>
+            <p> The project is a Tic-Tac-Toe web application developed using HTML for structure, CSS for styling, and JavaScript for interactivity and game logic.</p>
+            <button onclick="window.open('https://diwakaranr.github.io/ProdigyInfo-Tech/', '_blank')">View Demo</button>
+        </div>
+        <div class="project-card">
+            <h3>Crescent shaped calculator</h3>
+            <p>The project is a basic calculator web application built with HTML for structure, CSS for styling, and JavaScript for handling user input and performing calculations. </p>
+            <button onclick="window.open(' https://diwakaranr.github.io/CODSOFT/', '_blank')">View Demo</button>
+        </div>
+        <div class="project-card">
+            <h3>Portfolio</h3>
+            <p>The project is a personal portfolio website created using HTML and CSS, designed to present professional skills, projects, and contact information in a clean and engaging format. </p>
+            <button onclick="window.open(' https://diwakaranr.github.io/Codsoft-Portfolio-/', '_blank')">View Demo</button>
+        </div>
+        <div class="project-card">
+            <h3>Stop watch Application</h3>
+            <p> The project is a stopwatch web application developed using HTML for layout, CSS for styling, and JavaScript for interactive timer functionalities and event handling.</p>
+            <button onclick="window.open(' https://diwakaranr.github.io/ProdigyInfotech-Stop-watch-application-/', '_blank')">View Demo</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-glitter"></div>
+        <p>Contact us at <a href="mailto:karandiwa133@gmail.com" style="color: #ff5722;">karandiwa133@gmail.com</a></p>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showDemo(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function hideDemo(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
